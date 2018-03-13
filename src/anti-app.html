@@ -41,11 +41,6 @@
             }
 
             app-toolbar {
-                display: var(--layout-horizontal_-_display);
-                position: var(--layout-fixed-top_-_position);
-                top: var(--layout-fixed-top_-_top);
-                left: var(--layout-fixed-top_-_left);
-                right: var(--layout-fixed-top_-_right);
                 z-index: 1;
                 background-color: var(--app-primary-color);
                 --app-header-shadow_-_box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.2);
@@ -82,14 +77,17 @@
                 @apply --layout;
                 @apply --layout-center-center;
                 position: relative;
-                margin-top: 66px;
-                height: 66px;
+                height: 44px;
                 flex-direction: row;
                 justify-content: center;
             }
 
             .navTabs p {
                 padding: 0 32px;
+            }
+
+            iron-pages {
+                height: 100%;
             }
         </style>
 

@@ -9,16 +9,63 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="anti-item-container.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-view1">
     <template>
         <style include="shared-styles">
             :host {
+                height: 100%;
                 display: block;
             }
+
+            #featured {
+                background-color: #e0e0e0;
+                height: 100%;
+            }
+
+            #items {
+                display: flex;
+                width: 100%;
+                flex-wrap: wrap;
+                overflow-y: scroll;
+            }
+
+            #items div {
+                display: flex;
+                justify-content: flex-end;
+                flex-direction: column;
+                height: 33.3%;
+                width: 33.3%;
+            }
+
+            #items div p {
+                text-align: right;
+                padding-right: 8px;
+            }
+
+            .one {
+                background: #212121;
+            }
         </style>
-        <p>Test</p>
+        <anti-item-container>
+            <div slot="featured"></div>
+            <div id="items">
+                <div><p>IDK</p></div>
+                <div class="one"><p>IDK</p></div>
+                <div><p>IDK</p></div>
+                <div class="one"><p>IDK</p></div>
+                <div><p>IDK</p></div>
+                <div class="one"><p>IDK</p></div>
+                <div><p>IDK</p></div>
+                <div class="one"><p>IDK</p></div>
+                <div><p>IDK</p></div>
+                <div class="one"><p>IDK</p></div>
+                <div><p>IDK</p></div>
+                <div class="one"><p>IDK</p></div>
+            </div>
+        </anti-item-container>
     </template>
 
     <script>
