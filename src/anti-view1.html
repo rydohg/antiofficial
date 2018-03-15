@@ -9,11 +9,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="anti-item-container.html">
+<link rel="import" href="anti-items.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-view1">
     <template>
+        <!-- css.css -->
         <style include="shared-styles">
             :host {
                 height: 100%;
@@ -49,7 +50,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 background: #212121;
             }
         </style>
-        <anti-item-container>
+        <anti-items>
             <div slot="featured"></div>
             <div id="items">
                 <div><p>IDK</p></div>
@@ -65,7 +66,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <div><p>IDK</p></div>
                 <div class="one"><p>IDK</p></div>
             </div>
-        </anti-item-container>
+        </anti-items>
     </template>
 
     <script>

@@ -1,7 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="shared-styles.html">
 
-<dom-module id="anti-item-container">
+<dom-module id="anti-items">
     <template>
         <style include="shared-styles">
             :host {
@@ -23,6 +23,11 @@
             }
         </style>
 
+        <app-route
+                route="[[route]]"
+                pattern="/:category"
+                data="{{routeData}}"></app-route>
+
         <div id="featured-item">
             <slot name="featured"></slot>
         </div>
@@ -30,12 +35,12 @@
     </template>
 
     <script>
-        class AntiItemContainer extends Polymer.Element {
+        class AntiItems extends Polymer.Element {
             static get is() {
-                return 'anti-item-container';
+                return 'anti-items';
             }
         }
 
-        window.customElements.define(AntiItemContainer.is, AntiItemContainer);
+        window.customElements.define(AntiItems.is, AntiItems);
     </script>
 </dom-module>

@@ -1,6 +1,8 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/helpers/helpers.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
@@ -11,8 +13,9 @@
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="my-icons.html">
+<link rel="import" href="anti-categories.html">
 
-<link rel="lazy-import" href="my-view1.html">
+<link rel="lazy-import" href="anti-view1.html">
 <link rel="lazy-import" href="my-view2.html">
 <link rel="lazy-import" href="my-view3.html">
 <link rel="lazy-import" href="my-view404.html">
@@ -86,10 +89,16 @@
                 padding: 0 32px;
             }
 
+            .navTabs a {
+                color: #ffffff;
+            }
+
             iron-pages {
                 height: 100%;
             }
         </style>
+
+        <anti-categories categories="{{categories}}"></anti-categories>
 
         <app-location
                 route="{{route}}"
@@ -102,11 +111,13 @@
                 data="{{routeData}}"
                 tail="{{subroute}}">
         </app-route>
+
         <app-drawer-layout fullbleed force-narrow>
             <!-- Drawer content -->
             <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
                 <app-toolbar>Menu</app-toolbar>
                 <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+                    <a name="home" href="[[rootPath]]home">View One</a>
                     <a name="view1" href="[[rootPath]]view1">View One</a>
                     <a name="view2" href="[[rootPath]]view2">View Two</a>
                     <a name="view3" href="[[rootPath]]view3">View Three</a>
@@ -123,9 +134,13 @@
                         <div class="text-center" main-title>AntiOfficial</div>
                     </app-toolbar>
                     <div class="navTabs">
-                        <p>Test</p>
-                        <p>Test</p>
-                        <p>Test</p>
+                        <dom-repeat items="[[categories]]" as="category" initial-count="4">
+                            <template>
+                                <p>
+                                    <a href="/[[category.name]]">[[category.title]]</a>
+                                </p>
+                            </template>
+                        </dom-repeat>
                     </div>
                 </app-header>
 
@@ -134,6 +149,7 @@
                         attr-for-selected="name"
                         fallback-selection="view404"
                         role="main">
+                    <anti-home name="home"></anti-home>
                     <my-view1 name="view1"></my-view1>
                     <my-view2 name="view2"></my-view2>
                     <my-view3 name="view3"></my-view3>
@@ -160,6 +176,13 @@
                         reflectToAttribute: true,
                         observer: '_pageChanged',
                     },
+                    categories: {
+                        type: Array,
+                        value: [
+                            {name: 'Bob', title: 'Smith'},
+                            {name: 'Sally', title: 'Johnson'}
+                        ]
+                    },
                     routeData: Object,
                     subroute: Object,
                     // This shouldn't be neccessary, but the Analyzer isn't picking up
@@ -177,7 +200,7 @@
             _routePageChanged(page) {
                 // If no page was found in the route data, page will be an empty string.
                 // Default to 'view1' in that case.
-                this.page = page || 'view1';
+                this.page = page || 'home';
 
                 // Close a non-persistent drawer when the page & route are changed.
                 if (!this.$.drawer.persistent) {
@@ -187,7 +210,7 @@
 
             _pageChanged(page) {
                 // Load page import on demand. Show 404 page if fails
-                const resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
+                const resolvedPageUrl = this.resolveUrl('anti-' + page + '.html');
                 Polymer.importHref(
                     resolvedPageUrl,
                     null,

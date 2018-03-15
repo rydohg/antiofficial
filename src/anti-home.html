@@ -1,0 +1,31 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="anti-home">
+    <template>
+        <style include="shared-styles">
+            :host {
+                height: 100%;
+                padding: 16px;
+            }
+
+        </style>
+
+        <app-route
+                route="[[route]]"
+                pattern="/:category"
+                data="{{routeData}}"></app-route>
+
+        <a name="view1" href="[[rootPath]]view1">View 1</a>
+    </template>
+
+    <script>
+        class AntiHome extends Polymer.Element {
+            static get is() {
+                return 'anti-home';
+            }
+        }
+
+        window.customElements.define(AntiHome.is, AntiHome);
+    </script>
+</dom-module>
