@@ -1,0 +1,49 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="anti-list-item">
+    <template>
+        <style include="shared-styles">
+            :host {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+            }
+
+            #title {
+                width: 90%;
+                color: #000000;
+                font-size: 24px;
+                text-align: right;
+                margin-bottom: 8px;
+            }
+
+            a {
+                text-decoration: none;
+            }
+        </style>
+
+        <a href="[[link]]">
+            <p id="title">[[title]]</p>
+        </a>
+    </template>
+
+    <script>
+        class AntiListItem extends Polymer.Element {
+            static get is() {
+                return 'anti-list-item';
+            }
+
+            static get properties(){
+                return {
+                    title: String,
+                    link: String,
+                    image: String
+                }
+            }
+        }
+
+        window.customElements.define(AntiListItem.is, AntiListItem);
+    </script>
+</dom-module>

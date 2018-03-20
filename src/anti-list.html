@@ -11,10 +11,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="anti-categories.html">
+<link rel="import" href="anti-list-item.html">
 <link rel="import" href="anti-items.html">
 <link rel="import" href="shared-styles.html">
 
-<dom-module id="anti-mens">
+<dom-module id="anti-list">
     <template>
         <!-- css.css -->
         <style include="shared-styles">
@@ -24,23 +25,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             #featured {
-                background-color: #e0e0e0;
+                background-color: #f44336;
                 height: 100%;
             }
 
             #items {
                 display: flex;
+                height: 100%;
                 width: 100%;
                 flex-wrap: wrap;
                 overflow-y: scroll;
             }
 
-            #items div {
-                display: flex;
-                justify-content: flex-end;
-                flex-direction: column;
-                height: 33.3%;
-                width: 33.3%;
+            anti-list-item {
+                /*height: 33.3%;*/
+                /*width: 33.3%;*/
+            }
+
+            a:nth-child(odd){
+                background: #9E9E9E;
             }
 
             #items div p {
@@ -50,6 +53,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             .one {
                 background: #212121;
+            }
+
+            #items p {
+                width: 100%;
+                height: 16px;
+            }
+
+            .vertical {
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+            }
+
+            a {
+                width: 33.3%;
             }
         </style>
 
@@ -66,47 +84,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <anti-items>
             <div slot="featured"></div>
-            <div id="items">
-                <!--<div><p>IDK</p></div>
-                <div class="one"><p>IDK</p></div>
-                <div><p>IDK</p></div>
-                <div class="one"><p>IDK</p></div>
-                <div><p>IDK</p></div>
-                <div class="one"><p>IDK</p></div>
-                <div><p>IDK</p></div>
-                <div class="one"><p>IDK</p></div>
-                <div><p>IDK</p></div>
-                <div class="one"><p>IDK</p></div>
-                <div><p>IDK</p></div>
-                <div class="one"><p>IDK</p></div>-->
+            <div class="vertical">
                 <p>Category: [[category.title]]</p>
-                <dom-repeat items="[[_getListItems(category.items)]]" initial-count="4">
-                    <template>
-                        <p>
-                            <a href$="[[_getItemHref(item)]]"><p>[[item.title]]</p></a>
-                        </p>
-                    </template>
-                </dom-repeat>
+                <div id="items">
+                    <dom-repeat items="[[_getListItems(category.items)]]" initial-count="2">
+                        <template>
+                            <a href$="[[_getItemHref(item)]]">
+                                <anti-list-item
+                                        title="[[item.title]]"
+                                        link="[[_getItemHref(item)]]"
+                                        image=""></anti-list-item>
+                            </a>
+                        </template>
+                    </dom-repeat>
+                </div>
             </div>
         </anti-items>
     </template>
 
     <script>
-        class AntiMens extends Polymer.Element {
+        class AntiList extends Polymer.Element {
             static get is() {
-                return 'anti-mens';
+                return 'anti-list';
             }
-            static get properties(){
+
+            static get properties() {
                 return {
                     category: Object,
                     route: Object,
                     routeData: Object,
                 }
             }
+
             _getListItems(items) {
                 // Return placeholder items when the items haven't loaded yet.
-                return items || [{},{},{},{},{},{},{},{},{},{}];
+                return items || [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
             }
+
             _getItemHref(item) {
                 // By returning null when `itemId` is undefined, the href attribute won't be set and
                 // the link will be disabled.
@@ -114,6 +128,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
         }
 
-        window.customElements.define(AntiMens.is, AntiMens);
+        window.customElements.define(AntiList.is, AntiList);
     </script>
 </dom-module>

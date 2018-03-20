@@ -15,7 +15,7 @@
 <link rel="import" href="my-icons.html">
 <link rel="import" href="anti-categories.html">
 
-<link rel="lazy-import" href="anti-mens.html">
+<link rel="lazy-import" href="anti-list.html">
 <link rel="lazy-import" href="my-view2.html">
 <link rel="lazy-import" href="my-view3.html">
 <link rel="lazy-import" href="my-view404.html">
@@ -118,7 +118,7 @@
                 <app-toolbar>Menu</app-toolbar>
                 <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
                     <a name="home" href="[[rootPath]]home">View One</a>
-                    <a name="view1" href="[[rootPath]]mens">Mens</a>
+                    <a name="view1" href="[[rootPath]]/list/mens">Mens</a>
                     <a name="view2" href="[[rootPath]]view2">View Two</a>
                     <a name="view3" href="[[rootPath]]view3">View Three</a>
                 </iron-selector>
@@ -137,7 +137,7 @@
                         <dom-repeat items="[[categories]]" as="category" initial-count="4">
                             <template>
                                 <p>
-                                    <a href="/[[category.name]]">[[category.title]]</a>
+                                    <a href="/list/[[category.name]]">[[category.title]]</a>
                                 </p>
                             </template>
                         </dom-repeat>
@@ -150,7 +150,7 @@
                         fallback-selection="view404"
                         role="main">
                     <anti-home name="home"></anti-home>
-                    <anti-mens name="mens" route="[[route]]"></anti-mens>
+                    <anti-list name="list" route="[[subroute]]"></anti-list>
                     <my-view2 name="view2"></my-view2>
                     <my-view3 name="view3"></my-view3>
                     <my-view404 name="view404"></my-view404>
