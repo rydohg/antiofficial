@@ -129,17 +129,20 @@
                     <app-toolbar>
                         <!--TODO: Only show on small screens -->
                         <!--<paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>-->
-                        <div class="text-center" main-title>AntiOfficial</div>
+                        <div main-title>
+                            <img src="images/manifest/icon-48x48.png" alt="">
+                        </div>
+
+                        <div class="navTabs">
+                            <dom-repeat items="[[categories]]" as="category" initial-count="4">
+                                <template>
+                                    <p>
+                                        <a href="/list/[[category.name]]">[[category.title]]</a>
+                                    </p>
+                                </template>
+                            </dom-repeat>
+                        </div>
                     </app-toolbar>
-                    <div class="navTabs">
-                        <dom-repeat items="[[categories]]" as="category" initial-count="4">
-                            <template>
-                                <p>
-                                    <a href="/list/[[category.name]]">[[category.title]]</a>
-                                </p>
-                            </template>
-                        </dom-repeat>
-                    </div>
                 </app-header>
 
                 <iron-pages
