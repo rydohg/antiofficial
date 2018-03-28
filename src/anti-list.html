@@ -67,6 +67,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             a {
+                height: 300px;
                 width: 33.3%;
             }
         </style>
@@ -93,7 +94,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                 <anti-list-item
                                         title="[[item.title]]"
                                         link="[[_getItemHref(item)]]"
-                                        image=""></anti-list-item>
+                                        image="[[item.image]]"></anti-list-item>
                             </a>
                         </template>
                     </dom-repeat>

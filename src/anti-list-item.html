@@ -5,10 +5,9 @@
     <template>
         <style include="shared-styles">
             :host {
-                height: 100%;
-                display: flex;
+/*                display: flex;
                 flex-direction: column;
-                justify-content: flex-end;
+                justify-content: flex-end;*/
             }
 
             #title {
@@ -21,12 +20,34 @@
 
             a {
                 text-decoration: none;
+                position: absolute;
+                bottom: 8px;
+                right: 16px;
+            }
+
+            img {
+                height: 300px;
+                width: 100%;
+            }
+
+            .container {
+                position: relative;
+                height: 100%
             }
         </style>
-
-        <a href="[[link]]">
-            <p id="title">[[title]]</p>
-        </a>
+        <dom-if if="[[dark]]">
+            <style>
+                .container {
+                    color: #ffffff;
+                }
+            </style>
+        </dom-if>
+        <div class="container">
+            <img src="[[image]]" alt="">
+            <a href="[[link]]">
+                <p id="title">[[title]]</p>
+            </a>
+        </div>
     </template>
 
     <script>
