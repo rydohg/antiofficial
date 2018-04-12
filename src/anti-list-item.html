@@ -11,11 +11,11 @@
             }
 
             #title {
-                width: 90%;
+                width: 100%;
                 color: #000000;
                 font-size: 24px;
                 text-align: right;
-                margin-bottom: 8px;
+                margin-bottom: 0;
             }
 
             a {
@@ -35,13 +35,15 @@
                 height: 100%
             }
         </style>
-        <dom-if if="[[dark]]">
+
+        <template is="dom-if" if="{{dark}}">
             <style>
                 .container {
                     color: #ffffff;
                 }
             </style>
-        </dom-if>
+            <p>Test</p>
+        </template>
         <div class="container">
             <img src="[[image]]" alt="">
             <a href="[[link]]">

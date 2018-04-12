@@ -42,7 +42,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 /*width: 33.3%;*/
             }
 
-            a:nth-child(odd){
+            a:nth-child(odd) {
                 background: #9E9E9E;
             }
 
@@ -67,8 +67,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             a {
-                height: 300px;
+                height: 332px;
                 width: 33.3%;
+            }
+
+            .big {
+                font-size: 36px;
+                margin-top: 0;
+                margin-left: 16px;
+                margin-bottom: 0px;
+            }
+
+            .center {
+                text-align: center;
             }
         </style>
 
@@ -84,9 +95,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 failure="{{failure}}"></anti-categories>
 
         <anti-items>
-            <div slot="featured"></div>
+            <div slot="featured">
+                <p class="big center">Featured</p>
+                <img src="[[_getFirstItemImage(category.items)]]" alt="">
+                <p class="big center">[[_getFirstItemTitle(category.items)]]</p>
+            </div>
             <div class="vertical">
-                <p>Category: [[category.title]]</p>
                 <div id="items">
                     <dom-repeat items="[[_getListItems(category.items)]]" initial-count="2">
                         <template>
@@ -94,7 +108,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                 <anti-list-item
                                         title="[[item.title]]"
                                         link="[[_getItemHref(item)]]"
-                                        image="[[item.image]]"></anti-list-item>
+                                        image="[[item.image]]" dark="true"></anti-list-item>
                             </a>
                         </template>
                     </dom-repeat>
@@ -120,6 +134,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             _getListItems(items) {
                 // Return placeholder items when the items haven't loaded yet.
                 return items || [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+            }
+
+            _getFirstItemImage(items) {
+                console.log(items);
+                return items[0].image || ""
+            }
+
+            _getFirstItemTitle(items) {
+                return items[0].title || ""
             }
 
             _getItemHref(item) {
