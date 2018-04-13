@@ -28,12 +28,12 @@
                 display: block;
             }
 
-            app-drawer-layout:not([narrow]) [drawer-toggle] {
-                display: none;
+            app-drawer-layout {
+                background: #FAFAFA;
             }
 
-            app-drawer-layout {
-                /*background: #FAFAFA;*/
+            #drawer app-toolbar {
+                background: #FFFFFF;
             }
 
             app-header {
@@ -70,10 +70,6 @@
                 font-weight: bold;
             }
 
-            .text-center {
-                text-align: center;
-            }
-
             .navTabs {
                 @apply --layout;
                 @apply --layout-center-center;
@@ -81,6 +77,10 @@
                 height: 44px;
                 flex-direction: row;
                 justify-content: center;
+            }
+
+            .navTabs[hidden] {
+                display: none;
             }
 
             .navTabs p {
@@ -95,6 +95,8 @@
                 height: 100%;
             }
         </style>
+
+        <iron-media-query query="(max-width: 760px)" query-matches="{{narrow}}"></iron-media-query>
 
         <anti-categories categories="{{categories}}"></anti-categories>
 
@@ -115,25 +117,28 @@
             <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
                 <app-toolbar>Menu</app-toolbar>
                 <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-                    <a name="home" href="[[rootPath]]home">View One</a>
-                    <a name="view1" href="[[rootPath]]/list/mens">Mens</a>
-                    <a name="view2" href="[[rootPath]]view2">View Two</a>
-                    <a name="view3" href="[[rootPath]]view3">View Three</a>
+                    <a name="home" href="[[rootPath]]home">Home</a>
+                    <dom-repeat items="[[categories]]" as="category" initial-count="4">
+                        <template>
+                            <a name="list" href="/list/[[category.name]]">[[category.title]]</a>
+                        </template>
+                    </dom-repeat>
                 </iron-selector>
             </app-drawer>
-            <!-- Breakpoint at 1326px for anti-items-->
-            <!-- Main content -->
+
             <app-header-layout has-scrolling-region>
 
                 <app-header slot="header" condenses reveals effects="waterfall">
                     <app-toolbar>
-                        <!--TODO: Only show on small screens -->
-                        <!--<paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>-->
+                        <paper-icon-button icon="my-icons:menu" narrow="{{narrow}}" drawer-toggle></paper-icon-button>
                         <div main-title>
                             <img src="images/manifest/icon-48x48.png" alt="">
                         </div>
 
-                        <div class="navTabs">
+                        <div class="navTabs" hidden="{{narrow}}">
+                            <p>
+                                <a href="[[rootPath]]/">Home</a>
+                            </p>
                             <dom-repeat items="[[categories]]" as="category" initial-count="4">
                                 <template>
                                     <p>
@@ -152,6 +157,7 @@
                         role="main">
                     <anti-home name="home"></anti-home>
                     <anti-list name="list" route="[[subroute]]"></anti-list>
+                    <anti-detail name="detail" route="[[subroute]]"></anti-detail>
                     <my-view404 name="view404"></my-view404>
                 </iron-pages>
             </app-header-layout>

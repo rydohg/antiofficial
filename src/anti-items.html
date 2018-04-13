@@ -6,38 +6,148 @@
         <style include="shared-styles">
             :host {
                 height: 100%;
+            }
+
+            .container {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
             }
 
             #featured-item {
-                height: 100%;
                 width: 40%;
                 background: rgba(239, 83, 80, 0.9);
             }
 
+            #featured-item img {
+                display: block;
+                width: 80%;
+                margin: 0 auto;
+            }
+
             #items {
                 height: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                overflow-y: scroll;
+                justify-content: space-between;
+            }
+
+            a:nth-child(odd){
+                background: #CFD8DC;
+            }
+
+            #items p {
+                width: 100%;
+                height: 16px;
+            }
+
+            #items a {
+                flex-grow: 1;
+            }
+
+            .vertical {
+                display: flex;
                 width: 60%;
+                flex-direction: column;
+            }
+
+            a {
+                height: 360px;
+                width: 332px;
+            }
+
+            .big {
+                font-size: 36px;
+                margin-top: 0;
+                margin-left: 16px;
+                margin-bottom: 0;
+            }
+
+            .center {
+                text-align: center;
+            }
+
+            .container {
+                height: 100%;
+            }
+
+            .container[wide-layout] {
+                flex-direction: column;
+            }
+
+            .container[wide-layout] #featured-item {
+                width: 100%;
+                height: 15%;
+            }
+
+            .container[wide-layout] .vertical {
+                width: 100%;
+            }
+
+            .container[wide-layout] #items {
+                width: 100%;
+            }
+
+            .container[wide-layout] #featured-item img {
+                display: none;
             }
         </style>
+
+        <iron-media-query query="(max-width: 1400px)" query-matches="{{wide}}"></iron-media-query>
 
         <app-route
                 route="[[route]]"
                 pattern="/:category"
                 data="{{routeData}}"></app-route>
 
-        <div id="featured-item">
-            <slot name="featured"></slot>
+        <div class="container" wide-layout$="{{wide}}">
+            <div id="featured-item">
+                <p class="big center">Featured Today:</p>
+                <img src="[[_getFirstItemImage(items)]]" alt="">
+                <p class="big center">[[_getFirstItemTitle(items)]]</p>
+            </div>
+
+            <div class="vertical">
+                <div id="items">
+                    <dom-repeat items="[[items]]" initial-count="8">
+                        <template>
+                            <a href$="[[_getItemHref(item)]]">
+                                <anti-list-item
+                                        title="[[item.title]]"
+                                        link="[[_getItemHref(item)]]"
+                                        image="[[item.image]]"></anti-list-item>
+                            </a>
+                        </template>
+                    </dom-repeat>
+                </div>
+            </div>
         </div>
-        <slot id="items"></slot>
     </template>
 
     <script>
         class AntiItems extends Polymer.Element {
             static get is() {
                 return 'anti-items';
+            }
+
+            static get properties() {
+                return {
+                    items: Object,
+                    wide: Boolean
+                }
+            }
+
+            _getItemHref(item) {
+                return item.name ? ['/detail', item.category, item.name].join('/') : null;
+            }
+
+            _getFirstItemImage(items) {
+                return items[0].image || ""
+            }
+
+            _getFirstItemTitle(items) {
+                return items[0].title || ""
             }
         }
 

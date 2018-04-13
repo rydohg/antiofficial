@@ -1,0 +1,46 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="anti-select">
+    <template>
+        <style>
+            anti-select {
+                display: inline-block;
+                position: relative;
+                /* create a layer to avoid invalidation from other controls*/
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+            }
+            anti-select > select {
+                width: 100%;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                padding: 8px 24px 8px 0;
+                border: none;
+                background-color: transparent;
+                border-radius: 0;
+                font-size: 1em;
+                font-weight: 300;
+                color: var(--app-primary-color);
+                overflow: hidden;
+                margin: 0;
+                outline: none;
+            }
+            anti-select > select::-ms-expand {
+                display: none;
+            }
+            anti-select > select:focus:-moz-focusring {
+                color: transparent;
+                text-shadow: 0 0 0 #000;
+            }
+            anti-select > [prefix] {
+                position: absolute;
+                left: 0px;
+                top: calc(50% - 8px);
+                line-height: 16px;
+                color: var(--app-secondary-color);
+                pointer-events: none;
+            }
+        </style>
+    </template>
+</dom-module>

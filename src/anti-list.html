@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="anti-categories.html">
 <link rel="import" href="anti-list-item.html">
@@ -17,7 +18,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-module id="anti-list">
     <template>
-        <!-- css.css -->
         <style include="shared-styles">
             :host {
                 height: 100%;
@@ -29,21 +29,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 height: 100%;
             }
 
-            #items {
-                display: flex;
-                height: 100%;
+            #featured-img {
                 width: 100%;
-                flex-wrap: wrap;
-                overflow-y: scroll;
-            }
-
-            anti-list-item {
-                /*height: 33.3%;*/
-                /*width: 33.3%;*/
             }
 
             a:nth-child(odd) {
-                background: #9E9E9E;
+                background: #B0BEC5;
             }
 
             #items div p {
@@ -51,31 +42,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 padding-right: 8px;
             }
 
-            .one {
-                background: #212121;
-            }
-
             #items p {
                 width: 100%;
                 height: 16px;
-            }
-
-            .vertical {
-                display: flex;
-                width: 100%;
-                flex-direction: column;
-            }
-
-            a {
-                height: 332px;
-                width: 33.3%;
             }
 
             .big {
                 font-size: 36px;
                 margin-top: 0;
                 margin-left: 16px;
-                margin-bottom: 0px;
+                margin-bottom: 0;
             }
 
             .center {
@@ -94,25 +70,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 category="{{category}}"
                 failure="{{failure}}"></anti-categories>
 
-        <anti-items>
-            <div slot="featured">
+        <anti-items items="{{_getListItems(category.items)}}" >
+            <div slot="featured" id="featured">
                 <p class="big center">Featured</p>
-                <img src="[[_getFirstItemImage(category.items)]]" alt="">
+                <img id="featured-img" src="[[_getFirstItemImage(category.items)]]" alt="">
                 <p class="big center">[[_getFirstItemTitle(category.items)]]</p>
-            </div>
-            <div class="vertical">
-                <div id="items">
-                    <dom-repeat items="[[_getListItems(category.items)]]" initial-count="2">
-                        <template>
-                            <a href$="[[_getItemHref(item)]]">
-                                <anti-list-item
-                                        title="[[item.title]]"
-                                        link="[[_getItemHref(item)]]"
-                                        image="[[item.image]]" dark="true"></anti-list-item>
-                            </a>
-                        </template>
-                    </dom-repeat>
-                </div>
             </div>
         </anti-items>
     </template>
@@ -136,20 +98,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 return items || [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
             }
 
-            _getFirstItemImage(items) {
-                console.log(items);
-                return items[0].image || ""
-            }
-
-            _getFirstItemTitle(items) {
-                return items[0].title || ""
-            }
-
-            _getItemHref(item) {
-                // By returning null when `itemId` is undefined, the href attribute won't be set and
-                // the link will be disabled.
-                return item.name ? ['/detail', this.category.name, item.name].join('/') : null;
-            }
         }
 
         window.customElements.define(AntiList.is, AntiList);
