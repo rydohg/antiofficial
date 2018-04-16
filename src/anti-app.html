@@ -94,6 +94,23 @@
             iron-pages {
                 height: 100%;
             }
+
+            .social {
+                position: absolute;
+                top: 25%;
+                display: flex;
+                flex-direction: column;
+                width: 48px;
+            }
+
+            .social a {
+                height: 48px;
+            }
+
+            .social img {
+                height: 48px;
+                width: 48px;
+            }
         </style>
 
         <iron-media-query query="(max-width: 760px)" query-matches="{{narrow}}"></iron-media-query>
@@ -161,6 +178,11 @@
                     <my-view404 name="view404"></my-view404>
                 </iron-pages>
             </app-header-layout>
+            <div class="social">
+                <a href="http://twitter.com"><img src="images/twitter.png" alt=""></a>
+                <a href="http://facebook.com"><img src="images/facebook.png" alt=""></a>
+                <a href="http://instagram.com"><img src="images/instagram.png" alt=""></a>
+            </div>
         </app-drawer-layout>
     </template>
 

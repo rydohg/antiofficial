@@ -6,10 +6,68 @@
         <style include="shared-styles">
             :host {
                 height: 100%;
-                padding: 16px;
             }
+
             p {
                 margin-left: 16px;
+            }
+
+            .header {
+                height: 70%;
+                width: 100%;
+                background: var(--app-primary-color);
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                color: #ffffff;
+            }
+
+            .header img {
+                height: 256px;
+                width: 256px;
+            }
+
+            .header .title {
+                width: 100%;
+                text-align: center;
+                color: #ffffff;
+                font-size: 72px;
+                margin: 0;
+            }
+
+            .header p {
+                font-size: 24px;
+                text-align: center;
+                margin: 0 0 8px;
+            }
+
+            .row {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .textwithimage {
+                margin: 0;
+                background: var(--app-primary-color);
+                color: #ffffff;
+                font-size: 24px;
+            }
+
+            .textwithimage p {
+                margin: 0;
+            }
+
+            .business {
+                width: 50%;
+            }
+
+            @media (max-width: 700px) {
+                .header .title {
+                    font-size: 32px;
+                }
             }
         </style>
 
@@ -18,7 +76,31 @@
                 pattern="/:category"
                 data="{{routeData}}"></app-route>
 
-        <p>Welcome to AntiOfficial</p>
+        <div class="header">
+            <div class="row">
+                <img src="images/manifest/logo-1024.png" alt="">
+            </div>
+            <div class="row">
+                <p class="title">Welcome to AntiOfficial</p>
+                <p class="row"><em>"The best knockoffs on the planet"</em></p>
+            </div>
+        </div>
+        <div class="textwithimage">
+            <p class="row">Car Wrap</p>
+            <img class="row" src="images/antiChiron.png" alt="">
+        </div>
+        <div class="textwithimage">
+            <p class="row">Business Card</p>
+            <img class="business" src="images/antiChiron.png" alt="">
+        </div>
+        <div class="textwithimage">
+            <p class="row">Poster</p>
+            <img class="row" src="images/antiChiron.png" alt="">
+        </div>
+        <div class="footer">
+            <a href="mailto:rdoherty20@protonmail.com">Contact me</a>
+            © Copyright Ryan Doherty 2018
+        </div>
     </template>
 
     <script>

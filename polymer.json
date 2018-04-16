@@ -4,6 +4,7 @@
   "fragments": [
     "src/anti-home.html",
     "src/anti-list.html",
+    "src/anti-detail.html",
     "src/my-view404.html"
   ],
   "sources": [

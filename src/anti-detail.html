@@ -14,6 +14,7 @@
 
             img {
                 width: 600px;
+                height: 100%;
             }
 
             .detail {
@@ -25,6 +26,7 @@
                     width: 100%;
                     padding: 16px;
                 }
+
                 img {
                     width: 100%;
                     height: 100%;
@@ -74,10 +76,12 @@
                     <h2>Description</h2>
                     <p id="desc"></p>
                 </div>
-                <shop-button responsive>
-                    <button on-click="_addToCart" aria-label="Add this item to cart">Add to Cart</button>
-                </shop-button>
+                <button on-click="_addToCart" aria-label="Add this item to cart">Add to Cart</button>
             </div>
+        </div>
+        <div class="footer">
+            <a href="mailto:rdoherty20@protonmail.com">Contact me</a>
+            © Copyright Ryan Doherty 2018
         </div>
     </template>
 
